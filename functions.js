@@ -523,6 +523,9 @@ function displayInfo() {
 }
 
 $(document).ready(function() {
+    $("#themeChoice input").on("change", function() {
+        $("head #themeLink").prop("href", "theme_" + $("#themeChoice input[name=\"theme\"]:checked").val() + ".css");
+    });
     $("#reader").click(function() {
         loadGame();
         displayInfo();
