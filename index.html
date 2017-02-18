@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Clicker Lister</title>
     <!--Themes-->
-    <link id="themeLink" rel="stylesheet" href="theme_dark.css" type="text/css"/>
     <link rel="icon" href="favicon.png" type="image/png">
+    <!-- Latest compiled and minified CSS -->
+    <link id="style" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--Scripts-->
     <script type="text/javascript" src="https://cdn.rawgit.com/MikeMcl/decimal.js/master/decimal.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -13,19 +19,23 @@
 </head>
 
 <body>
-    <div style="width: 863px; text-align:center;">
-        <h1>CLICKER LISTER</h1>
-        <form id="themeChoice">
-            <input type="radio" name="theme" value="dark" checked>Dark theme
-            <input type="radio" name="theme" value="light">Light theme
+    <div class="col-xs-6 col-lg-6">
+        <h1 class="forms text-center">CLICKER LISTER</h1>
+        <form class="form-inline text-center" id="themeChoice">
+            <input type="radio" name="theme" value="dark" >Dark theme
+            <input type="radio" name="theme" value="light" checked>Light theme
         </form>
-        <textarea id="savegame" rows="15" cols="50" placeholder="Paste save game here"></textarea>
-        <textarea id="result" rows="15" cols="50" onclick="this.select();"></textarea>
-        <br>
-        <button id="reader">
+        <div class="col-xs-6 col-lg-6">
+            <textarea class="form-control" id="savegame" rows="15" placeholder="Paste save game here"></textarea>
+        </div>
+        <div class="col-xs-6 col-lg-6">
+            <textarea class="form-control" id="result" rows="15" onclick="this.select();"></textarea>
+        </div>
+        <div class="clearfix"></div>
+        <button class="btn btn-primary center-block" id="reader">
             Read save game
         </button>
-        <div>Display:
+        <div class="form-inline text-center">Display:
             <input type="checkbox" value="outsiders" checked/>Outsiders
             <input type="checkbox" value="ancients" checked/>Ancients
             <input type="checkbox" value="gilds" checked/>Gilds
@@ -35,6 +45,7 @@
             <input type="checkbox" value="event" />Event
             <input type="checkbox" value="totalRelicBonuses" checked/>Total Relic Bonuses
         </div>
+        <p>Made by graceoflives.</p>
     </div>
-    <p>Made by graceoflives.</p>
+    
 </body>

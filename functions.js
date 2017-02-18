@@ -524,7 +524,10 @@ function displayInfo() {
 
 $(document).ready(function() {
     $("#themeChoice input").on("change", function() {
-        $("head #themeLink").prop("href", "theme_" + $("#themeChoice input[name=\"theme\"]:checked").val() + ".css");
+        if ($(this).val() == "dark")
+            $("link[id=\"style\"]").attr("href", "slate-bootstrap.css");
+        else
+            $("link[id=\"style\"]").attr("href", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
     });
     $("#reader").click(function() {
         loadGame();
