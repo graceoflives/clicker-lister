@@ -5,7 +5,7 @@
     <title>Clicker Lister</title>
     <!--Themes-->
     <link rel="icon" href="favicon.png" type="image/png">
-    <link id="style" rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+    <link id="style" rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/MikeMcl/decimal.js/master/decimal.min.js"></script>
@@ -16,6 +16,7 @@
         @import url('https://fonts.googleapis.com/css?family=Inconsolata');
         textarea {
             font-family: 'Inconsolata', monospace;
+            resize: vertical;
         }
     </style>
 </head>
@@ -27,8 +28,10 @@
     <div class="col-xs-3 col-lg-3"></div>
     <div class="col-xs-6 col-lg-6">
         <form class="form-inline text-center" id="themeChoice">
-            <input type="radio" name="theme" value="dark" >Dark theme
-            <input type="radio" name="theme" value="light" checked>Light theme
+            <input type="radio" name="theme" id="dark" value="dark" checked>
+            <label for="dark">Dark theme</label>
+            <input type="radio" name="theme" id="light" value="light">
+            <label for="light">Light theme</label>
         </form>
         <div class="col-xs-6 col-lg-6">
             <textarea class="form-control" id="savegame" rows="15" placeholder="Paste save game here"></textarea>
@@ -37,7 +40,8 @@
             <textarea class="form-control" id="result" rows="15" onclick="this.select();"></textarea>
         </div>
         <div class="clearfix"></div>
-        <button class="btn btn-success center-block" id="reader">
+        <div style="width: 100%; height: 5px;"></div>
+        <button type="button" class="btn btn-success center-block" id="reader">
             Read save game
         </button>
         <p class="text-center">Display:</p>
@@ -68,7 +72,7 @@
             </span>
             <span class="button-checkbox">
                 <button type="button" class="btn btn-sm" data-color="info">Event</button>
-                <input type="checkbox" value="event" class="hidden"/>
+                <input type="ch<eckbox" value="event" class="hidden"/>
             </span>
             <span class="button-checkbox">
                 <button type="button" class="btn btn-sm" data-color="info">Total Relic Bonuses</button>
