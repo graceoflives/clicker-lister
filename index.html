@@ -5,17 +5,19 @@
     <title>Clicker Lister</title>
     <!--Themes-->
     <link rel="icon" href="favicon.png" type="image/png">
-    <!-- Latest compiled and minified CSS -->
-    <link id="style" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- jQuery library -->
+    <link id="style" rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--Scripts-->
     <script type="text/javascript" src="https://cdn.rawgit.com/MikeMcl/decimal.js/master/decimal.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script type="text/javascript" src="functions.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+        textarea {
+            font-family: 'Inconsolata', monospace;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +37,7 @@
             <textarea class="form-control" id="result" rows="15" onclick="this.select();"></textarea>
         </div>
         <div class="clearfix"></div>
-        <button class="btn btn-default center-block" id="reader">
+        <button class="btn btn-success center-block" id="reader">
             Read save game
         </button>
         <div class="form-inline text-center">Display:

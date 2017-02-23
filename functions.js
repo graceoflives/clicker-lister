@@ -525,9 +525,9 @@ function displayInfo() {
 $(document).ready(function() {
     $("#themeChoice input").on("change", function() {
         if ($(this).val() == "dark")
-            $("link[id=\"style\"]").attr("href", "slate-bootstrap.css");
+            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/darkly/bootstrap.min.css");
         else
-            $("link[id=\"style\"]").attr("href", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/flatly/bootstrap.min.css");
     });
     $("#reader").click(function() {
         loadGame();
