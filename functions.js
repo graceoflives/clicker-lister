@@ -301,6 +301,8 @@ function loadGame() {
 }
 
 function nf(number) {
+    if (number.lt(0))
+        return "-" + nf(number.times(-1))
     if (number.lt(10000))
         return number.toFixed(0);
     else
@@ -315,6 +317,15 @@ function tf(time) {
     temp -= hour * 3600;
     var min = Math.floor(temp / 60);
     return (day + "d " + hour + "h " + min + "m");
+}
+
+function tf_2(time) {
+    var temp = Math.round(time / 1000);
+    var hour = Math.floor(temp / 3600);
+    temp -= hour * 3600;
+    var min = Math.floor(temp / 60);
+    var sec = temp - min * 60;
+    return (hour + "h" + min + "m" + sec +"s");
 }
 
 function getRelicBonus(id) {
@@ -500,6 +511,36 @@ function showTotalRelicBonuses() {
     return rs;
 }
 
+function showTLog() {
+    var log = rawData.stats.transcensions;
+    var rs = "Transcension Log:\n\n| No. | Duration | HS gained | HZE |\n|:-:|:-:|:-:|:-:|\n";
+    $.each(log, function(key, value){
+        $("select").append('<option>' + key + '</option>');
+        var temp = "";
+        temp += "|" + value.id + "|";
+        temp += tf_2(value.endTime - value.startTime) + "|";
+        temp += nf(Decimal(value.heroSoulsGained)) + "|";
+        temp += value.highestZoneEver + "|";
+        rs += temp + "\n";
+    });
+    $("select").val($("select option:last").val()).trigger("change");
+    $("#log_t").text(rs);
+}
+
+function showALog(ntrans) {
+    var log = rawData.stats.transcensions[ntrans].ascensions;
+    var rs = "Ascension in Transcension #" + ntrans +":\n\n| No. | Duration | HS gained | HZE |\n|:-:|:-:|:-:|:-:|\n";
+    $.each(log, function(key, value){
+        var temp = "";
+        temp += "|" + value.id + "|";
+        temp += tf_2(value.endTime - value.startTime) + "|";
+        temp += nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)) + "|";
+        temp += value.highestZoneEver + "|";
+        rs += temp + "\n";
+    });
+    $("#log_a").text(rs);
+}
+
 function displayInfo() {
     var saveGameText = "";
     if ($("input[value=outsiders]").is(":checked"))
@@ -519,6 +560,7 @@ function displayInfo() {
     if ($("input[value=totalRelicBonuses]").is(":checked"))
         saveGameText += showTotalRelicBonuses() + "\n\n";
     saveGameText = saveGameText.substring(0, saveGameText.length - 2);
+    showTLog();
     $("#result").text(saveGameText);
 }
 
@@ -529,10 +571,17 @@ $(document).ready(function() {
         else
             $("link[id=\"style\"]").attr("href", "https://bootswatch.com/flatly/bootstrap.min.css");
     });
+
     $("#reader").click(function() {
         loadGame();
         displayInfo();
     });
+
+    $("select").on("change", function() {
+        var n = $(this).val();
+        showALog(n);
+    });
+
     $('.button-checkbox').each(function () {
 
         // Settings
