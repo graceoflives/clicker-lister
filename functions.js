@@ -316,7 +316,7 @@ function tf(time) {
     var hour = Math.floor(temp / 3600);
     temp -= hour * 3600;
     var min = Math.floor(temp / 60);
-    return (day + "d " + hour + "h " + min + "m");
+    return (((day == 0) ? "" : (day + "d ")) + ((hour == 0) ? "" : (hour + "h ")) + min + "m");
 }
 
 function tf_2(time) {
@@ -325,7 +325,14 @@ function tf_2(time) {
     temp -= hour * 3600;
     var min = Math.floor(temp / 60);
     var sec = temp - min * 60;
-    return (hour + "h" + min + "m" + sec +"s");
+    return (((hour == 0) ? "" : (hour + "h")) + ((min == 0) ? "" : (min + "m")) + sec +"s");
+}
+
+function fixedLengthOutput(out, length) {
+    var _loc = out.toString();
+    while (_loc.length < length)
+        _loc = ' ' + _loc;
+    return _loc;
 }
 
 function getRelicBonus(id) {
@@ -513,14 +520,14 @@ function showTotalRelicBonuses() {
 
 function showTLog() {
     var log = rawData.stats.transcensions;
-    var rs = "Transcension Log:\n\n| No. | Duration | HS gained | HZE |\n|:-:|:-:|:-:|:-:|\n";
+    var rs = "Transcension Log:\n\n| No. | Duration | HS gained |  HZE  |\n|:---:|:--------:|:---------:|:-----:|\n";
     $.each(log, function(key, value){
         $("select").append('<option>' + key + '</option>');
         var temp = "";
-        temp += "|" + value.id + "|";
-        temp += tf_2(value.endTime - value.startTime) + "|";
-        temp += nf(Decimal(value.heroSoulsGained)) + "|";
-        temp += value.highestZoneEver + "|";
+        temp += "|" + fixedLengthOutput(value.id, 5) + "|";
+        temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
+        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsGained)), 11) + "|";
+        temp += fixedLengthOutput(value.highestZoneEver, 7) + "|";
         rs += temp + "\n";
     });
     $("select").val($("select option:last").val()).trigger("change");
@@ -529,13 +536,13 @@ function showTLog() {
 
 function showALog(ntrans) {
     var log = rawData.stats.transcensions[ntrans].ascensions;
-    var rs = "Ascension in Transcension #" + ntrans +":\n\n| No. | Duration | HS gained | HZE |\n|:-:|:-:|:-:|:-:|\n";
+    var rs = "Ascensions in Transcension #" + ntrans + ":\n\n| No. | Duration | HS gained |  HZE  |\n|:---:|:--------:|:---------:|:-----:|\n";
     $.each(log, function(key, value){
         var temp = "";
-        temp += "|" + value.id + "|";
-        temp += tf_2(value.endTime - value.startTime) + "|";
-        temp += nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)) + "|";
-        temp += value.highestZoneEver + "|";
+        temp += "|" + fixedLengthOutput(value.id, 5) + "|";
+        temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
+        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)), 11) + "|";
+        temp += fixedLengthOutput(value.highestZoneEver, 7) + "|";
         rs += temp + "\n";
     });
     $("#log_a").text(rs);
