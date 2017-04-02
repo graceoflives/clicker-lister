@@ -520,14 +520,20 @@ function showTotalRelicBonuses() {
 
 function showTLog() {
     var log = rawData.stats.transcensions;
-    var rs = "Transcension Log:\n\n| No. | Duration | HS gained |  HZE  |\n|:---:|:--------:|:---------:|:-----:|\n";
+    alert(typeof(log));
+    var rs = "Transcension Log:\n\n"
+           + "| No. | Duration |  HZE  | HS gained |  AS  |\n"
+           + "|:---:|:--------:|:-----:|:---------:|:----:|\n";
     $.each(log, function(key, value){
         $("select").append('<option>' + key + '</option>');
         var temp = "";
         temp += "|" + fixedLengthOutput(value.id, 5) + "|";
         temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
-        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsGained)), 11) + "|";
         temp += fixedLengthOutput(value.highestZoneEver, 7) + "|";
+        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsGained)), 11) + "|";
+    
+        var _loc = Decimal.log10(value.heroSoulsGained).times(5).floor();
+        temp += fixedLengthOutput(_loc, 6) + "|";
         rs += temp + "\n";
     });
     $("select").val($("select option:last").val()).trigger("change");
@@ -536,13 +542,15 @@ function showTLog() {
 
 function showALog(ntrans) {
     var log = rawData.stats.transcensions[ntrans].ascensions;
-    var rs = "Ascensions in Transcension #" + ntrans + ":\n\n| No. | Duration | HS gained |  HZE  |\n|:---:|:--------:|:---------:|:-----:|\n";
+    var rs = "Ascensions in Transcension #" + ntrans + ":\n\n"
+           + "| No. | Duration |  HZE  | HS gained |\n"
+           + "|:---:|:--------:|:-----:|:---------:|\n";
     $.each(log, function(key, value){
         var temp = "";
         temp += "|" + fixedLengthOutput(value.id, 5) + "|";
         temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
-        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)), 11) + "|";
         temp += fixedLengthOutput(value.highestZoneEver, 7) + "|";
+        temp += fixedLengthOutput(nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)), 11) + "|";
         rs += temp + "\n";
     });
     $("#log_a").text(rs);
