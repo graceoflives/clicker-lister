@@ -520,7 +520,6 @@ function showTotalRelicBonuses() {
 
 function showTLog() {
     var log = rawData.stats.transcensions;
-    alert(typeof(log));
     var rs = "Transcension Log:\n\n"
            + "| No. | Duration |  HZE  | HS gained |  AS  |\n"
            + "|:---:|:--------:|:-----:|:---------:|:----:|\n";
