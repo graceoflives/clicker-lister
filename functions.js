@@ -288,9 +288,9 @@ var outsiders = {
     },
 }
 
-function loadGame() {
+function loadGame(encodedData) {
     var SPLITTER = "Fe12NAfA3R6z4k0z";
-    var ipData = $("#savegame").val();
+    var ipData = encodedData;
     if (ipData.indexOf(SPLITTER) > 0) {
         ipData = ipData.split(SPLITTER)[0];
         var temp = "";
@@ -586,8 +586,17 @@ $(document).ready(function() {
             $("link[id=\"style\"]").attr("href", "https://bootswatch.com/flatly/bootstrap.min.css");
     });
 
-    $("#reader").click(function() {
-        loadGame();
+    $("#savegameFile").on("change", function() {
+        var fr = new FileReader();
+        fr.readAsText($(this).prop("files")[0]);
+        fr.onload = function() {
+            loadGame(fr.result);
+            displayInfo();
+        };
+    });
+
+    $("#savegameText").on("change", function() {
+        loadGame($(this).val());
         displayInfo();
     });
 
