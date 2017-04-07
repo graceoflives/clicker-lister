@@ -536,7 +536,7 @@ function showTLog() {
         rs += temp + "\n";
     });
     $("select").val($("select option:last").val()).trigger("change");
-    $("#log_t").text(rs);
+    $("#log_t").val(rs);
 }
 
 function showALog(ntrans) {
@@ -552,30 +552,30 @@ function showALog(ntrans) {
         temp += fixedLengthOutput(nf(Decimal(value.heroSoulsEnd).minus(value.heroSoulsStart)), 11) + "|";
         rs += temp + "\n";
     });
-    $("#log_a").text(rs);
+    $("#log_a").val(rs);
 }
 
 function displayInfo() {
-    var saveGameText = "";
+    var sgt = "";
     if ($("input[value=outsiders]").is(":checked"))
-        saveGameText += showOutsiders() + "\n\n";
+        sgt += showOutsiders() + "\n\n";
     if ($("input[value=ancients]").is(":checked"))
-        saveGameText += showAncients() + "\n\n";
+        sgt += showAncients() + "\n\n";
     if ($("input[value=gilds]").is(":checked"))
-        saveGameText += showGilds() + "\n\n";
+        sgt += showGilds() + "\n\n";
     if ($("input[value=miscs]").is(":checked"))
-        saveGameText += showMiscs() + "\n\n";
+        sgt += showMiscs() + "\n\n";
     if ($("input[value=times]").is(":checked"))
-        saveGameText += showDurations() + "\n\n";
+        sgt += showDurations() + "\n\n";
     if ($("input[value=event]").is(":checked"))
-        saveGameText += showEvent() + "\n\n";
+        sgt += showEvent() + "\n\n";
     if ($("input[value=relics]").is(":checked"))
-        saveGameText += showRelics() + "\n\n";
+        sgt += showRelics() + "\n\n";
     if ($("input[value=totalRelicBonuses]").is(":checked"))
-        saveGameText += showTotalRelicBonuses() + "\n\n";
-    saveGameText = saveGameText.substring(0, saveGameText.length - 2);
+        sgt += showTotalRelicBonuses() + "\n\n";
+    sgt = sgt.substring(0, sgt.length - 2);
     showTLog();
-    $("#result").text(saveGameText);
+    $("#result").val(sgt);
 }
 
 $(document).ready(function() {
