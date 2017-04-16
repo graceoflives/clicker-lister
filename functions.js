@@ -523,6 +523,7 @@ function showTLog() {
     var rs = "Transcension Log:\n\n"
            + "| No. | Duration |  HZE  | HS gained |  AS  |\n"
            + "|:---:|:--------:|:-----:|:---------:|:----:|\n";
+    $("select").empty();
     $.each(log, function(key, value){
         $("select").append('<option>' + key + '</option>');
         var temp = "";
@@ -626,6 +627,7 @@ $(document).ready(function() {
             $checkbox.prop('checked', !$checkbox.is(':checked'));
             $checkbox.triggerHandler('change');
             updateDisplay();
+            displayInfo();
         });
         $checkbox.on('change', function () {
             updateDisplay();
