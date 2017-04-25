@@ -23,31 +23,31 @@
 
 <body>
     <h1 class="text-center">CLICKER LISTER</h1>
-    <div class="col-xs-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12">
         <form class="form-inline text-center" id="themeChoice">
             <input type="radio" name="theme" id="dark" value="dark" checked>
             <label for="dark">Dark theme</label>
             <input type="radio" name="theme" id="light" value="light">
             <label for="light">Light theme</label>
         </form>
-        <div class="col-xs-2 col-lg-2"></div>
-        <div class="col-xs-4 col-lg-4">
+        <div class="col-sm-2"></div>
+        <div class="col-xs-12 col-sm-4">
             <label class="form-control btn btn-info">
                 Browse the file... <input class="hidden" type="file" id="savegameFile"/>
             </label>
         </div>
-        <div class="col-xs-4 col-lg-4">
+        <div class="col-xs-12 col-sm-4">
             <input class="form-control" type="text" id="savegameText" placeholder="...or paste your save game here"/>
         </div>
-        <div class="col-xs-2 col-lg-2"></div>
+        <div class="col-sm-2"></div>
         <div class="clearfix"></div>
-        <div class="col-xs-4 col-lg-4">
+        <div class="col-xs-12 col-sm-4">
             <textarea class="form-control" id="result" rows="15" onclick="this.select();"></textarea>
         </div>
-        <div class="col-xs-4 col-lg-4">
+        <div class="col-xs-12 col-sm-4">
             <textarea class="form-control" id="log_t" placeholder="Transcension Log" rows="15" onclick="this.select();"></textarea>
         </div>
-        <div class="col-xs-4 col-lg-4">
+        <div class="col-xs-12 col-sm-4">
             <select class="form-control" style="height: 42px;">
                 <option selected style="display: none;">Choose transcension no.</option>
             </select>
