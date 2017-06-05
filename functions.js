@@ -325,7 +325,7 @@ function tf_2(time) {
     temp -= hour * 3600;
     var min = Math.floor(temp / 60);
     var sec = temp - min * 60;
-    return (((hour == 0) ? "" : (hour + "h")) + ((min == 0) ? "" : (min + "m")) + sec +"s");
+    return (((hour == 0) ? "" : (hour + "h")) + ((min == 0) ? "" : (min + "m")) + sec + "s");
 }
 
 function fixedLengthOutput(out, length) {
@@ -520,18 +520,16 @@ function showTotalRelicBonuses() {
 
 function showTLog() {
     var log = rawData.stats.transcensions;
-    var rs = "Transcension Log:\n\n"
-           + "| No. | Duration |  HZE  | HS gained |  AS  |\n"
-           + "|:---:|:--------:|:-----:|:---------:|:----:|\n";
+    var rs = "Transcension Log:\n\n" + "| No. | Duration |  HZE  | HS gained |  AS  |\n" + "|:---:|:--------:|:-----:|:---------:|:----:|\n";
     $("select").empty();
-    $.each(log, function(key, value){
+    $.each(log, function(key, value) {
         $("select").append('<option>' + key + '</option>');
         var temp = "";
         temp += "|" + fixedLengthOutput(value.id, 5) + "|";
         temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
         temp += fixedLengthOutput(value.highestZoneEver, 7) + "|";
         temp += fixedLengthOutput(nf(Decimal(value.heroSoulsGained)), 11) + "|";
-    
+
         var _loc = Decimal.log10(value.heroSoulsGained).times(5).floor();
         temp += fixedLengthOutput(_loc, 6) + "|";
         rs += temp + "\n";
@@ -542,10 +540,8 @@ function showTLog() {
 
 function showALog(ntrans) {
     var log = rawData.stats.transcensions[ntrans].ascensions;
-    var rs = "Ascensions in Transcension #" + ntrans + ":\n\n"
-           + "| No. | Duration |  HZE  | HS gained |\n"
-           + "|:---:|:--------:|:-----:|:---------:|\n";
-    $.each(log, function(key, value){
+    var rs = "Ascensions in Transcension #" + ntrans + ":\n\n" + "| No. | Duration |  HZE  | HS gained |\n" + "|:---:|:--------:|:-----:|:---------:|\n";
+    $.each(log, function(key, value) {
         var temp = "";
         temp += "|" + fixedLengthOutput(value.id, 5) + "|";
         temp += fixedLengthOutput(tf_2(value.endTime - value.startTime), 10) + "|";
@@ -606,7 +602,7 @@ $(document).ready(function() {
         showALog(n);
     });
 
-    $('.button-checkbox').each(function () {
+    $('.button-checkbox').each(function() {
 
         // Settings
         var $widget = $(this),
@@ -623,13 +619,13 @@ $(document).ready(function() {
             };
 
         // Event Handlers
-        $button.on('click', function () {
+        $button.on('click', function() {
             $checkbox.prop('checked', !$checkbox.is(':checked'));
             $checkbox.triggerHandler('change');
             updateDisplay();
             displayInfo();
         });
-        $checkbox.on('change', function () {
+        $checkbox.on('change', function() {
             updateDisplay();
         });
 
@@ -650,8 +646,7 @@ $(document).ready(function() {
                 $button
                     .removeClass('btn-default')
                     .addClass('btn-' + color + ' active');
-            }
-            else {
+            } else {
                 $button
                     .removeClass('btn-' + color + ' active')
                     .addClass('btn-default');
