@@ -11,8 +11,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/MikeMcl/decimal.js/master/decimal.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script async type="text/javascript" src="pako-master/dist/pako.min.js"></script>
     <script type="text/javascript" src="functions.js"></script>
-    <script async="" src="//www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" src="decoder.js"></script>
     <style>
     @import url('https://fonts.googleapis.com/css?family=Inconsolata');
     textarea {
@@ -84,7 +85,7 @@
             </span>
             <span class="button-checkbox">
                 <button type="button" class="btn btn-sm" data-color="info">Event</button>
-                <input type="ch<eckbox" value="event" class="hidden"/>
+                <input type="checkbox" value="event" class="hidden"/>
             </span>
             <span class="button-checkbox">
                 <button type="button" class="btn btn-sm" data-color="info">Total Relic Bonuses</button>
@@ -94,13 +95,19 @@
         <p>Made by graceoflives.</p>
     </div>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-102196022-2', 'auto');
     ga('send', 'pageview');
-
     </script>
 </body>

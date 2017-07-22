@@ -289,15 +289,7 @@ var outsiders = {
 }
 
 function loadGame(encodedData) {
-    var SPLITTER = "Fe12NAfA3R6z4k0z";
-    var ipData = encodedData;
-    if (ipData.indexOf(SPLITTER) > 0) {
-        ipData = ipData.split(SPLITTER)[0];
-        var temp = "";
-        for (var i = 0; i < ipData.length; i += 2)
-            temp += ipData[i];
-        rawData = JSON.parse(atob(temp));
-    }
+    rawData = decoder.decode_main(encodedData);
 }
 
 function nf(number) {
