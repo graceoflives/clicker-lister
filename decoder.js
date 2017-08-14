@@ -38,8 +38,7 @@ var decoder = {
 	stringToBinaryArray: function(str) {
 		var binary = [];
 		for (var i = 0; i < str.length; ++i) {
-			var code = str.charCodeAt(i);
-			binary = binary.concat([code]);
+			binary.push(str.charCodeAt(i));
 		}
 		return binary;
 	},
