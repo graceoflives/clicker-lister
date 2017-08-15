@@ -30,16 +30,8 @@ var decoder = {
 
 	decode_zlib: function(inputString) {
 		var pako = window.pako;
-		var binArray = new Uint8Array(decoder.stringToBinaryArray(atob(inputString.substring(32))));
+		var binArray = atob(inputString.substring(32));
 		var output = JSON.parse(pako.inflate(binArray, {to: 'string'}));
 		return output;
-	},
-
-	stringToBinaryArray: function(str) {
-		var binary = [];
-		for (var i = 0; i < str.length; ++i) {
-			binary.push(str.charCodeAt(i));
-		}
-		return binary;
 	},
 };
