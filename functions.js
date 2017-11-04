@@ -570,9 +570,9 @@ function displayInfo() {
 $(document).ready(function() {
     $("#themeChoice input").on("change", function() {
         if ($(this).val() == "dark")
-            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/darkly/bootstrap.min.css");
+            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/3/darkly/bootstrap.min.css");
         else
-            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/flatly/bootstrap.min.css");
+            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/3/flatly/bootstrap.min.css");
     });
 
     $("#savegameFile").on("change", function() {
@@ -603,10 +603,10 @@ $(document).ready(function() {
             color = $button.data('color'),
             settings = {
                 on: {
-                    icon: 'glyphicon glyphicon-check'
+                    icon: 'fa fa-check'
                 },
                 off: {
-                    icon: 'glyphicon glyphicon-unchecked'
+                    icon: 'fa fa-times'
                 }
             };
 
