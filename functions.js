@@ -464,7 +464,8 @@ function showMiscs() {
         var currentASGain = Decimal(0);
     rs += "AS (" + rawData.ancientSoulsTotal + " +" + currentASGain + ", " + (rawData.ancientSouls != "0" ? "***" : "") + "Unspent: " + rawData.ancientSouls + (rawData.ancientSouls != "0" ? "***" : "") + "); ";
     //about TP
-    var tp = 1 + 49 * (1 - Math.exp(-Number(rawData.ancientSoulsTotal) / 10000)) + 50 * (1 - Math.exp(-Number(rawData.outsiders.outsiders[3].level) / 1000));
+    var tp = 25 - 23 * Math.exp(-0.0003 * Number(rawData.ancientSoulsTotal));
+    //var tp = 1 + 49 * (1 - Math.exp(-Number(rawData.ancientSoulsTotal) / 10000)) + 50 * (1 - Math.exp(-Number(rawData.outsiders.outsiders[3].level) / 1000));
     rs += "TP (" + Decimal(tp).toFixed(3) + "%); ";
     //about HS
     rs += "HS (" + nf(currentHS) + ", Spent: " + nf(spentHS) + ", Sacrificed: " + nf(sacrificedHS) + "); ";
