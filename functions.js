@@ -135,14 +135,29 @@ var heroes = {
     "45": {
         "name": "Madzi"
     },
+    "46": {
+        "name": "Xavira"
+    },
+    "47": {
+        "name": "Cadu"
+    },
+    "48": {
+        "name": "Ceus"
+    },
+    "49": {
+        "name": "The Maw"
+    },
+    "50": {
+        "name": "Yachiyl"
+    },
 }
 
 var ancients = {
-    "3": {
+    /*"3": {
         "name": "Solomon",
         "level": 0,
         "bonusType": 25
-    },
+    },*/
     "4": {
         "name": "Libertas",
         "level": 0,
@@ -162,6 +177,11 @@ var ancients = {
         "name": "Mimzee",
         "level": 0,
         "bonusType": 21
+    },
+    "10": {
+        "name": "Pluto",
+        "level": 0,
+        "bonusType": 20
     },
     "11": {
         "name": "Dogcog",
@@ -280,11 +300,26 @@ var outsiders = {
     "3": {
         "name": "Phandoryss"
     },
-    "4": {
+    /*"4": {
         "name": "Borb"
-    },
+    },*/
     "5": {
         "name": "Ponyboy"
+    },
+    "6": {
+        "name": "Borb"
+    },
+    "7": {
+        "name": "Rhageist"
+    },
+    "8": {
+        "name": "K'Ariqua"
+    },
+    "9": {
+        "name": "Orphalas"
+    },
+    "10": {
+        "name": "Sen-Akhan"
     },
 }
 
@@ -343,8 +378,14 @@ function getRelicBonus(id) {
 
 function showOutsiders() {
     var rs = "**Outsiders:** ";
-    for (var i in outsiders)
-        rs += outsiders[i].name + " (" + rawData.outsiders.outsiders[i].level + "), ";
+    for (var i in outsiders) {
+        if (!!rawData.outsiders.outsiders[i]) {
+            rs += outsiders[i].name + " (" + rawData.outsiders.outsiders[i].level + "), ";
+        }
+        else {
+            rs += outsiders[i].name + " (0), ";   
+        }
+    }
     rs = rs.substring(0, rs.length - 2) + ".";
     return rs;
 }
@@ -395,9 +436,11 @@ function showGilds() {
     var rs = "**Gilds:** ";
     var noGild = true;
     for (var i in heroes) {
-        if (rawData.heroCollection.heroes[i].epicLevel > 0) {
-            noGild = false;
-            rs += heroes[i].name + " (" + rawData.heroCollection.heroes[i].epicLevel + "), ";
+        if (!!rawData.heroCollection.heroes[i]) {
+            if (rawData.heroCollection.heroes[i].epicLevel > 0) {
+                noGild = false;
+                rs += heroes[i].name + " (" + rawData.heroCollection.heroes[i].epicLevel + "), ";
+            }
         }
     }
     if (noGild)
