@@ -346,13 +346,22 @@ function tf(time) {
     return (((day == 0) ? "" : (day + "d ")) + ((hour == 0) ? "" : (hour + "h ")) + min + "m");
 }
 
+function minTwoDigit(n) {
+    if (n < 10) {
+        return '0' + n;
+    }
+    else {
+        return n;
+    }
+}
+
 function tf_2(time) {
     var temp = Math.round(time / 1000);
     var hour = Math.floor(temp / 3600);
     temp -= hour * 3600;
     var min = Math.floor(temp / 60);
     var sec = temp - min * 60;
-    return (((hour == 0) ? "" : (hour + "h")) + ((min == 0) ? "" : (min + "m")) + sec + "s");
+    return (((hour == 0) ? "" : (hour + "h")) + ((min == 0) ? "" : (minTwoDigit(min) + "m")) + minTwoDigit(sec) + "s");
 }
 
 function fixedLengthOutput(out, length) {
