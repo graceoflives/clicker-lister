@@ -41,7 +41,7 @@
         <form class="form-inline text-center" id="themeChoice">
             <input type="radio" name="theme" id="dark" value="dark" checked>
             <label for="dark">Dark theme</label>
-            <input type="radio" name="theme" id="light" value="light">
+            <input type="radio" name="theme" id="light" value="light" style="margin-left: 10px;">
             <label for="light">Light theme</label>
         </form>
         <div class="col-sm-2"></div>
@@ -54,24 +54,9 @@
         <div class="col-xs-12 col-sm-4">
             <input class="form-control" type="text" id="savegameText" placeholder="...or paste your save game here" />
         </div>
-        <div class="col-sm-2"></div>
         <div class="clearfix"></div>
-        <div class="col-xs-12 col-sm-4">
-            <textarea class="form-control" id="result" rows="15" onclick="this.select();"></textarea>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <textarea class="form-control" id="log_t" placeholder="Transcension Log" rows="15" onclick="this.select();"></textarea>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <select class="form-control" style="height: 42px;">
-                <option selected style="display: none;">Choose transcension no.</option>
-            </select>
-            <textarea class="form-control" id="log_a" placeholder="Ascension Log" rows="13" onclick="this.select();"></textarea>
-        </div>
-        <div class="clearfix"></div>
-        <div style="width: 100%; height: 5px;"></div>
-        <p class="text-center">Display:</p>
-        <div class="text-center">
+        <div class="text-center" style="margin-top: 10px;">
+            <span class="text-center">Display:&nbsp;</span>
             <span class="button-checkbox">
                 <button type="button" class="btn btn-sm" data-color="info">Outsiders</button>
                 <input type="checkbox" value="outsiders" class="hidden" checked />
@@ -105,7 +90,23 @@
                 <input type="checkbox" value="totalRelicBonuses" class="hidden" checked />
             </span>
         </div>
-        <p>Made by graceoflives.</p>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-top: 10px;">
+            <textarea class="form-control" id="result" placeholder="Overall Infomation" rows="15" onclick="this.select();"></textarea>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 col-sm-4 col-sm-offset-2" style="margin-top: 10px;">
+            <textarea class="form-control" id="log_t" placeholder="Transcension Log" rows="15" onclick="this.select();"></textarea>
+        </div>
+        <div class="col-xs-12 col-sm-4" style="margin-top: 10px;">
+            <select class="form-control" style="height: 53px; margin-bottom: 10px;">
+                <option selected style="display: none;">Choose transcension no.</option>
+            </select>
+            <textarea class="form-control" id="log_a" placeholder="Ascension Log" rows="12" onclick="this.select();"></textarea>
+        </div>
+        <div class="clearfix"></div>
+        <div style="margin-top: 10px;">
+            <p>Made by graceoflives.</p>
+        </div>
     </div>
     <script>
     (function(i, s, o, g, r, a, m) {
