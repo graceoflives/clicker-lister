@@ -323,6 +323,17 @@ var outsiders = {
     },
 }
 
+var aryDisplayOption = [
+    ['outsiders', 'showOutsiders'],
+    ['ancients', 'showAncients'],
+    ['gilds', 'showGilds'],
+    ['miscs', 'showMiscs'],
+    ['times', 'showDurations'],
+    ['event', 'showEvent'],
+    ['relics', 'showRelics'],
+    ['totalRelicBonuses', 'showTotalRelicBonuses'],
+];
+
 function loadGame(encodedData) {
     rawData = decoder.decode_main(encodedData);
 }
@@ -349,8 +360,7 @@ function tf(time) {
 function minTwoDigit(n) {
     if (n < 10) {
         return '0' + n;
-    }
-    else {
+    } else {
         return n;
     }
 }
@@ -390,9 +400,8 @@ function showOutsiders() {
     for (var i in outsiders) {
         if (!!rawData.outsiders.outsiders[i]) {
             rs += outsiders[i].name + " (" + rawData.outsiders.outsiders[i].level + "), ";
-        }
-        else {
-            rs += outsiders[i].name + " (0), ";   
+        } else {
+            rs += outsiders[i].name + " (0), ";
         }
     }
     rs = rs.substring(0, rs.length - 2) + ".";
@@ -599,29 +608,19 @@ function showALog(ntrans) {
 }
 
 function displayInfo() {
-    var sgt = "";
-    if ($("input[value=outsiders]").is(":checked"))
-        sgt += showOutsiders() + "\n\n";
-    if ($("input[value=ancients]").is(":checked"))
-        sgt += showAncients() + "\n\n";
-    if ($("input[value=gilds]").is(":checked"))
-        sgt += showGilds() + "\n\n";
-    if ($("input[value=miscs]").is(":checked"))
-        sgt += showMiscs() + "\n\n";
-    if ($("input[value=times]").is(":checked"))
-        sgt += showDurations() + "\n\n";
-    if ($("input[value=event]").is(":checked"))
-        sgt += showEvent() + "\n\n";
-    if ($("input[value=relics]").is(":checked"))
-        sgt += showRelics() + "\n\n";
-    if ($("input[value=totalRelicBonuses]").is(":checked"))
-        sgt += showTotalRelicBonuses() + "\n\n";
-    sgt = sgt.substring(0, sgt.length - 2);
-    showTLog();
-    $("#result").val(sgt);
+    if (rawData) {
+        var sgt = "";
+        aryDisplayOption.forEach(function(cv) {
+            if ($("input[value=" + cv[0] + "]").is(":checked"))
+                sgt += window[cv[1]]() + "\n\n";
+        });
+        sgt = sgt.substring(0, sgt.length - 2);
+        showTLog();
+        $("#result").val(sgt);
+    }
 }
 
-$(document).ready(function() {
+function __init() {
     $("#themeChoice input").on("change", function() {
         if ($(this).val() == "dark")
             $("link[id=\"style\"]").attr("href", "https://bootswatch.com/3/darkly/bootstrap.min.css");
@@ -649,7 +648,6 @@ $(document).ready(function() {
     });
 
     $('.button-checkbox').each(function() {
-
         // Settings
         var $widget = $(this),
             $button = $widget.find('button'),
@@ -711,4 +709,8 @@ $(document).ready(function() {
         }
         init();
     });
+}
+
+$(document).ready(function() {
+    __init();
 });
