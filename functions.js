@@ -150,6 +150,18 @@ var heroes = {
     "50": {
         "name": "Yachiyl"
     },
+    "51": {
+        "name": "Ace Scout Rose"
+    },
+    "52": {
+        "name": "Ace Scout Sophia"
+    },
+    "53": {
+        "name": "Ace Scout Blanche"
+    },
+    "54": {
+        "name": "Ace Scout Dorothy"
+    },
 }
 
 var ancients = {
