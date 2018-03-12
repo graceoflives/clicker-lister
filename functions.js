@@ -518,7 +518,7 @@ function showMiscs() {
     var achievementCount = 0;
     for (var i in rawData.achievements)
         achievementCount++;
-    rs += "Achievements (" + achievementCount + "/161); ";
+    rs += "Achievements (" + achievementCount + "/167); ";
     //cleanup
     rs = rs.substring(0, rs.length - 2) + ".";
     return rs;
