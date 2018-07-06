@@ -635,9 +635,9 @@ function displayInfo() {
 function __init() {
     $("#themeChoice input").on("change", function() {
         if ($(this).val() == "dark")
-            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/3/darkly/bootstrap.min.css");
+            $("link[id=\"style\"]").attr("href", "https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/darkly/bootstrap.min.css");
         else
-            $("link[id=\"style\"]").attr("href", "https://bootswatch.com/3/flatly/bootstrap.min.css");
+            $("link[id=\"style\"]").attr("href", "https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css");
     });
 
     $("#savegameFile").on("change", function() {
