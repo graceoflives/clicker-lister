@@ -339,11 +339,12 @@ var aryDisplayOption = [
     ['outsiders', 'showOutsiders'],
     ['ancients', 'showAncients'],
     ['gilds', 'showGilds'],
+    ['raids', 'showRaids'],
     ['miscs', 'showMiscs'],
     ['times', 'showDurations'],
     ['event', 'showEvent'],
     ['relics', 'showRelics'],
-    ['totalRelicBonuses', 'showTotalRelicBonuses'],
+    ['totalRelicBonuses', 'showTotalRelicBonuses']
 ];
 
 function loadGame(encodedData) {
@@ -480,6 +481,8 @@ function showGilds() {
     return rs;
 }
 
+showRaids = () => `**Raids:** Class (${['', 'Rogue', 'Mage', 'Priest'][parseInt(rawData.newClanRaidClassId)]}), Level (${parseInt(rawData.newClanRaidClassLevel)}), Immortal Souls (Current: ${rawData.immortalSouls}, Pending: ${rawData.pendingImmortalSouls}).`;
+
 function showMiscs() {
     var rs = "**Miscs:** ";
     //about AS
@@ -508,7 +511,7 @@ function showMiscs() {
     rs += "Relics Found (This Transcension: " + rawData.relicsReceivedThisTranscension + ", Total: " + rawData.totalRelicsReceived + "); ";
     //about ID
     rs += "Immortal Damage (" + nf(Decimal(rawData.titanDamage)) + "); ";
-    //about Rubies 
+    //about Rubies
     rs += "Rubies (" + rawData.rubies + "); ";
     //about the Ruby DPS Multiplier
     rs += "2x multiplier to all your dmg (" + (rawData.paidForRubyMultiplier == true ? "Yes" : "No") + "); ";
