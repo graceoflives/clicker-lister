@@ -1,3 +1,5 @@
 # Clicker Lister
+Extract info from your Clicker Heroes save game in Reddit-friendly format.
 
-https://graceoflives.github.io/clicker-lister/
+# Author
+graceoflives.
