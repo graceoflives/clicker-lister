@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+:root {
+  --font-family: 'Lato', 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+textarea {
+  font-family: 'Inconsolata', monospace;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--color);
+  font-family: var(--font-family);
+}
+
+button {
+  cursor: pointer;
+
+  &:active, &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &:hover {
+    box-shadow: inset 1px 1px 20px 10px rgba(0, 0, 0, 0.5);
+  }
+}

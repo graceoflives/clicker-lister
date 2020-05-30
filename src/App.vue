@@ -1,28 +1,69 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="wrapper">
+        <header>Clicker Lister</header>
+        <theme-select/>
+        <save-input/>
+        <display-toggler/>
+        <lister-area/>
+        <div>Made by graceoflives. Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import ThemeSelect from './components/ThemeSelect';
+    import SaveInput from './components/SaveInput';
+    import DisplayToggler from './components/DisplayToggler';
+    import ListerArea from './components/ListerArea';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'App',
+        components: {
+            ListerArea,
+            SaveInput,
+            ThemeSelect,
+            DisplayToggler
+        },
+        watch: {
+            theme: {
+                handler: function () {
+                    let body = document.getElementsByTagName('body');
+                    let cssVars = '';
+                    for (let v in this.cssVars) {
+                        cssVars += `${v}: ${this.cssVars[v]};`
+                    }
+                    body[0].style = cssVars;
+                },
+                immediate: true
+            }
+        },
+        computed: {
+            theme() {
+                return this.$store.getters.getTheme;
+            },
+            cssVars() {
+                if (this.theme === 'dark') {
+                    return {
+                        '--bg-color': '#222222',
+                        '--color': '#FFFFFF'
+                    }
+                } else {
+                    return {
+                        '--bg-color': '#FFFFFF',
+                        '--color': '#2C3E50'
+                    }
+                }
+            }
+        }
+    }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped lang="scss">
+    .wrapper {
+        > header {
+            margin: 15px 0;
+            font-size: 40px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
 </style>
