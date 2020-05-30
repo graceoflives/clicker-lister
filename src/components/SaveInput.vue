@@ -30,7 +30,7 @@
                         this.decodedData = (newValue.substring(0, ZLIB_HEADER.length) === ZLIB_HEADER) ? this.decodeZLib(newValue) : this.decodeBase64(newValue);
                     } catch (e) {
                         this.decodedData = '';
-                        alert('Error!');
+                        console.log('Save file corrupted and unable to read!');
                     }
                 }
             },

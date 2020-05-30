@@ -28,14 +28,19 @@ const store = new Vuex.Store({
                 visible: true
             },
             {
+                name: 'miscellaneous',
+                label: 'Miscellaneous',
+                visible: true
+            },
+            {
                 name: 'time',
                 label: 'Times',
                 visible: true
             },
             {
-                name: 'miscellaneous',
-                label: 'Miscellaneous',
-                visible: true
+                name: 'event',
+                label: 'Events',
+                visible: false
             },
             {
                 name: 'relic',
@@ -46,18 +51,13 @@ const store = new Vuex.Store({
                 name: 'totalRelicBonus',
                 label: 'Total Relic Bonuses',
                 visible: false
-            },
-            {
-                name: 'event',
-                label: 'Events',
-                visible: false
-            },
+            }
         ]
     },
     getters: {
         getTheme: store => store.theme,
         getRawData: store => ({...store.rawData}),
-        getDisplay: store => ({...store.display})
+        getDisplay: store => ([...store.display])
     },
     mutations: {
         SET_THEME: (state, data) => {
