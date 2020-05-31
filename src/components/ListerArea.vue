@@ -7,11 +7,18 @@
                 rows="15"
                 :value="textGeneralInfo"
         ></textarea>
+        <textarea
+                aria-label="Transcension Log"
+                class="t-log"
+                placeholder="Transcension Log"
+                rows="15"
+                :value="transHistory"
+        ></textarea>
     </div>
 </template>
 
 <script>
-    import {isEmpty, get} from 'lodash';
+    import {get, isEmpty, pad, padStart} from 'lodash';
     import {Decimal} from 'decimal.js';
 
     const DISPLAY_FUNCTION_MAP = {
@@ -232,8 +239,7 @@
         name: 'ListerArea',
         data() {
             return {
-                ascHistory: '',
-                transHistory: '',
+                ascHistory: ''
             }
         },
         computed: {
@@ -254,6 +260,35 @@
                     return _r.join('\n\n');
                 }
                 return '';
+            },
+            transHistory() {
+                let tLog = get(this.rawData, 'stats.transcensions', []);
+                tLog = Object.entries(tLog).map(([, v]) => {
+                    const {
+                        endTime,
+                        heroSoulsGained,
+                        highestZoneEver,
+                        id,
+                        numAscensions,
+                        startTime
+                    } = v;
+                    return [
+                        id.toString(),
+                        this.formatTime(new Date().getTime() + startTime - endTime),
+                        numAscensions.toString(),
+                        highestZoneEver.toString(),
+                        this.formatDecimal(new Decimal(heroSoulsGained)),
+                        Decimal.log10(heroSoulsGained).times(5).floor().toString()
+                    ];
+                });
+                const _label = ['No.', 'Duration', 'Ascensions', 'HZE', 'HS', 'AS'];
+                const _lengthLog = [0, 1, 2, 3, 4, 5].map(i => Math.max(_label[i].length, ...tLog.map(v => v[i].length)));
+                const _tableHeader = `|${_label.map((v, i) => `${pad(v, _lengthLog[i], ' ')}`).join('|')}|`;
+                const _tableRows = tLog.map(v => {
+                    v = v.map((s, i) => `${padStart(s, _lengthLog[i], ' ')}`).join('|');
+                    return `|${v}|`;
+                }).join('\n');
+                return `${_tableHeader}\n${_tableRows}`
             }
         },
         methods: {
@@ -465,7 +500,7 @@
                     day = cur / 86400 | 0,
                     hour = (cur - day * 86400) / 3600 | 0,
                     min = (cur - day * 86400 - hour * 3600) / 60 | 0;
-                return `${day ? `${day}h ` : ''}${hour ? `${hour}h ` : ''}${min}m`;
+                return `${day ? `${day}d ` : ''}${hour ? `${hour}h ` : ''}${min}m`;
             }
 
         }
@@ -476,6 +511,16 @@
     .lister-area {
         margin-top: 10px;
 
+        textarea {
+            border: 1px solid var(--color);
+            border-radius: 4px;
+            padding: 10px;
+            background-color: var(--bg-color);
+            font-size: 15px;
+            color: var(--color);
+            resize: vertical;
+        }
+
         > .overall {
             display: block;
             width: (2/3) * 100%;
@@ -484,9 +529,12 @@
             border-radius: 4px;
             padding: 10px;
             background-color: var(--bg-color);
-            font-size: 16px;
+            font-size: 15px;
             color: var(--color);
             resize: vertical;
+        }
+        >.t-log {
+            width: 100%;
         }
     }
 </style>
