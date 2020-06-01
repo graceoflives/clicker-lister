@@ -6,6 +6,7 @@
                 placeholder="Overall Information"
                 rows="15"
                 :value="textGeneralInfo"
+                @focus="copyCommand"
         ></textarea>
         <div class="logs">
             <div class="t-log-wrapper">
@@ -14,6 +15,7 @@
                           placeholder="Transcension Log"
                           rows="15"
                           :value="transHistory"
+                          @focus="copyCommand"
                 ></textarea>
             </div>
             <div class="a-log-wrapper">
@@ -32,6 +34,7 @@
                           placeholder="Ascension Log"
                           rows="14"
                           :value="ascHistory"
+                          @focus="copyCommand"
                 ></textarea>
             </div>
         </div>
@@ -578,8 +581,11 @@
                     hour = (cur - day * 86400) / 3600 | 0,
                     min = (cur - day * 86400 - hour * 3600) / 60 | 0;
                 return `${day ? `${day}d ` : ''}${hour ? `${hour}h ` : ''}${min}m`;
+            },
+            copyCommand(e) {
+                e.target.select();
+                document.execCommand('copy');
             }
-
         }
     }
 </script>
