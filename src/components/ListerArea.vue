@@ -263,33 +263,36 @@
             },
             transHistory() {
                 let tLog = get(this.rawData, 'stats.transcensions', []);
-                tLog = Object.entries(tLog).map(([, v]) => {
-                    const {
-                        endTime,
-                        heroSoulsGained,
-                        highestZoneEver,
-                        id,
-                        numAscensions,
-                        startTime
-                    } = v;
-                    return [
-                        id.toString(),
-                        this.formatTime(new Date().getTime() + startTime - endTime),
-                        numAscensions.toString(),
-                        highestZoneEver.toString(),
-                        this.formatDecimal(new Decimal(heroSoulsGained)),
-                        Decimal.log10(heroSoulsGained).times(5).floor().toString()
-                    ];
-                });
-                const _label = ['No.', 'Duration', 'Ascensions', 'HZE', 'HS', 'AS'];
-                const _lengthLog = [0, 1, 2, 3, 4, 5].map(i => Math.max(_label[i].length, ...tLog.map(v => v[i].length)));
-                const _tableHeader = `|${_label.map((v, i) => `${pad(v, _lengthLog[i], ' ')}`).join('|')}|`;
-                const _tableRows = tLog.map(v => {
-                    v = v.map((s, i) => `${padStart(s, _lengthLog[i], ' ')}`).join('|');
-                    return `|${v}|`;
-                }).join('\n');
-                return `${_tableHeader}\n${_tableRows}`
-            }
+                if (!isEmpty(tLog)) {
+                    tLog = Object.entries(tLog).map(([, v]) => {
+                        const {
+                            endTime,
+                            heroSoulsGained,
+                            highestZoneEver,
+                            id,
+                            numAscensions,
+                            startTime
+                        } = v;
+                        return [
+                            id.toString(),
+                            this.formatTime(new Date().getTime() + startTime - endTime),
+                            numAscensions.toString(),
+                            highestZoneEver.toString(),
+                            this.formatDecimal(new Decimal(heroSoulsGained)),
+                            Decimal.log10(heroSoulsGained).times(5).floor().toString()
+                        ];
+                    });
+                    const _label = ['No.', 'Duration', 'Ascensions', 'HZE', 'HS', 'AS'];
+                    const _lengthLog = [0, 1, 2, 3, 4, 5].map(i => Math.max(_label[i].length, ...tLog.map(v => v[i].length)));
+                    const _tableHeader = `|${_label.map((v, i) => `${pad(v, _lengthLog[i], ' ')}`).join('|')}|`;
+                    const _tableRows = tLog.map(v => {
+                        v = v.map((s, i) => `${padStart(s, _lengthLog[i], ' ')}`).join('|');
+                        return `|${v}|`;
+                    }).join('\n');
+                    return `${_tableHeader}\n${_tableRows}`;
+                }
+                return '';
+            },
         },
         methods: {
             showOutsider() {
@@ -533,7 +536,8 @@
             color: var(--color);
             resize: vertical;
         }
-        >.t-log {
+
+        > .t-log {
             width: 100%;
         }
     }
