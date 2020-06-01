@@ -7,13 +7,34 @@
                 rows="15"
                 :value="textGeneralInfo"
         ></textarea>
-        <textarea
-                aria-label="Transcension Log"
-                class="t-log"
-                placeholder="Transcension Log"
-                rows="15"
-                :value="transHistory"
-        ></textarea>
+        <div class="logs">
+            <div class="t-log-wrapper">
+                <textarea aria-label="Transcension Log"
+                          class="t-log"
+                          placeholder="Transcension Log"
+                          rows="15"
+                          :value="transHistory"
+                ></textarea>
+            </div>
+            <div class="a-log-wrapper">
+                <select v-model="selectedTrans" class="a-log-select">
+                    <option value="">Select transcension to show ascensions</option>
+                    <option
+                            v-for="option in transSelectOptions"
+                            :key="option.value"
+                            :value="option.value"
+                    >
+                        {{ option.text}}
+                    </option>
+                </select>
+                <textarea aria-label="Ascension Log"
+                          class="a-log"
+                          placeholder="Ascension Log"
+                          rows="14"
+                          :value="ascHistory"
+                ></textarea>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -239,7 +260,14 @@
         name: 'ListerArea',
         data() {
             return {
-                ascHistory: ''
+                selectedTrans: ''
+            }
+        },
+        watch: {
+            transSelectOptions: function(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    this.selectedTrans = '';
+                }
             }
         },
         computed: {
@@ -289,10 +317,56 @@
                         v = v.map((s, i) => `${padStart(s, _lengthLog[i], ' ')}`).join('|');
                         return `|${v}|`;
                     }).join('\n');
-                    return `${_tableHeader}\n${_tableRows}`;
+                    return `Transcension Log:\n\n${_tableHeader}\n${_tableRows}`;
                 }
                 return '';
             },
+            transSelectOptions() {
+                let tLog = get(this.rawData, 'stats.transcensions', []);
+                if (!isEmpty(tLog)) {
+                    const _options = Object.entries(tLog).map(([, v]) => {
+                        return {
+                            value: v.id,
+                            text: `No ${v.id}`
+                        }
+                    });
+                    return _options;
+                }
+                return [];
+            },
+            ascHistory() {
+                if (this.selectedTrans !== '') {
+                    let aLog = get(this.rawData, `stats.transcensions[${this.selectedTrans}].ascensions`, []);
+                    if (!isEmpty(aLog)) {
+                        aLog = Object.entries(aLog).map(([, v]) => {
+                            const {
+                                endTime,
+                                heroSoulsEnd,
+                                heroSoulsStart,
+                                highestZoneEver,
+                                id,
+                                startTime
+                            } = v;
+                            return [
+                                id.toString(),
+                                this.formatTime(new Date().getTime() + startTime - endTime),
+                                highestZoneEver.toString(),
+                                this.formatDecimal(new Decimal(heroSoulsEnd).minus(heroSoulsStart))
+                            ]
+                        });
+                        const _label = ['No.', 'Duration', 'HZE', 'HS'];
+                        const _lengthLog = [0, 1, 2, 3].map(i => Math.max(_label[i].length, ...aLog.map(v => v[i].length)));
+                        const _tableHeader = `|${_label.map((v, i) => `${pad(v, _lengthLog[i], ' ')}`).join('|')}|`;
+                        const _tableRows = aLog.map(v => {
+                            v = v.map((s, i) => `${padStart(s, _lengthLog[i], ' ')}`).join('|');
+                            return `|${v}|`;
+                        }).join('\n');
+                        return `Ascensions in Transcension #${this.selectedTrans}\n\n${_tableHeader}\n${_tableRows}`;
+                    }
+                    return '';
+                }
+                return '';
+            }
         },
         methods: {
             showOutsider() {
@@ -537,8 +611,44 @@
             resize: vertical;
         }
 
-        > .t-log {
-            width: 100%;
+        > .logs {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            width: (2/3) * 100%;
+            margin: 10px auto 0;
+
+            > .t-log-wrapper {
+                flex: 1;
+
+                > .t-log {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            > .a-log-wrapper {
+                flex: 1;
+                margin-left: 10px;
+
+                > .a-log-select {
+                    display: block;
+                    width: 100%;
+                    border: 1px solid var(--color);
+                    border-radius: 4px;
+                    padding: 10px;
+                    background-color: var(--bg-color);
+                    font-size: 15px;
+                    color: var(--color);
+                }
+
+                > .a-log {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+            }
         }
+
+
     }
 </style>

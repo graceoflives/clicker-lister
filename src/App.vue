@@ -5,7 +5,8 @@
         <save-input/>
         <display-toggler/>
         <lister-area/>
-        <div>Made by graceoflives. Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <footer>Made by graceoflives. Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a>
+            from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></footer>
     </div>
 </template>
 
@@ -64,6 +65,11 @@
             font-size: 40px;
             text-align: center;
             text-transform: uppercase;
+        }
+
+        > footer {
+            margin: 10px 0;
+            padding-left: 10px;
         }
     }
 </style>
