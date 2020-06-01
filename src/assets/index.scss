@@ -16,15 +16,17 @@ body {
   background-color: var(--bg-color);
   color: var(--color);
   font-family: var(--font-family);
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
+
   &::-webkit-scrollbar-track {
     box-shadow: inset 1px 1px 20px 10px rgba(0, 0, 0, 0.5);
   }
+
   &::-webkit-scrollbar-thumb {
-    //width: 8px;
     border-radius: 4px;
     background: var(--color);
   }
@@ -41,8 +43,12 @@ input, select {
 
 textarea {
   font-family: var(--font-family-textarea);
-}
 
+  &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+}
 
 
 button {
