@@ -107,4 +107,23 @@
             }
         }
     }
+
+    @media screen and (max-width: 525px) {
+        .save-input {
+            display: block;
+            padding: 10px;
+
+            > button {
+                width: 100%;
+                margin: 0;
+            }
+
+            > input {
+                &[type="text"] {
+                    width: 100%;
+                    margin: 10px 0 0;
+                }
+            }
+        }
+    }
 </style>

@@ -264,7 +264,7 @@
             }
         },
         watch: {
-            transSelectOptions: function(newValue, oldValue) {
+            transSelectOptions: function (newValue, oldValue) {
                 if (newValue !== oldValue) {
                     this.selectedTrans = '';
                 }
@@ -648,7 +648,25 @@
                 }
             }
         }
+    }
 
+    @media screen and (max-width: 992px) {
+        .lister-area {
+            padding: 10px 10px 0;
 
+            > .overall {
+                width: 100%;
+            }
+
+            > .logs {
+                display: block;
+                width: 100%;
+
+                > .a-log-wrapper {
+                    margin: 10px 0 0;
+                }
+            }
+        ;
+        }
     }
 </style>
