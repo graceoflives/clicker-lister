@@ -84,9 +84,13 @@
             border: 0;
             border-radius: 4px;
             padding: 20px 0;
-            background-color: #217DBB;
+            background-color: var(--btn-bg-color);
             font-size: 16px;
-            color: #FFFFFF;
+            color: var(--color);
+
+            &:hover {
+                background-color: var(--btn-bg-color-hover);
+            }
         }
 
         > input {

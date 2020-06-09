@@ -45,12 +45,22 @@
                 if (this.theme === 'dark') {
                     return {
                         '--bg-color': '#222222',
-                        '--color': '#FFFFFF'
+                        '--color': '#FFFFFF',
+                        '--link-color': '#217DBB',
+                        '--btn-bg-color': '#217DBB',
+                        '--btn-bg-color-hover': '#175883',
+                        '--btn-bg-color-inactive': '#454545',
+                        '--btn-bg-color-inactive-hover': '#313030',
                     }
                 } else {
                     return {
                         '--bg-color': '#FFFFFF',
-                        '--color': '#2C3E50'
+                        '--color': '#2C3E50',
+                        '--link-color': '#84C0E9',
+                        '--btn-bg-color': '#84C0E9',
+                        '--btn-bg-color-hover': '#2790D8',
+                        '--btn-bg-color-inactive': '#A2A2A2',
+                        '--btn-bg-color-inactive-hover': '#717171',
                     }
                 }
             }

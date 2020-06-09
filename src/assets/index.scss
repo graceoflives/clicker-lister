@@ -23,13 +23,17 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    box-shadow: inset 1px 1px 20px 10px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background: var(--color);
   }
+}
+
+a {
+  color: var(--link-color);
 }
 
 input, select {
@@ -48,19 +52,31 @@ textarea {
     outline: none;
     text-decoration: none;
   }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--color);
+  }
 }
 
 
 button {
+  box-shadow: 0 4px 1px -2px rgba(0, 0, 0, 0.15);
   font-family: var(--font-family);
   cursor: pointer;
+  transition: background-color 0.5s;
 
   &:active, &:focus {
     outline: none;
     text-decoration: none;
-  }
-
-  &:hover {
-    box-shadow: inset 1px 1px 20px 10px rgba(0, 0, 0, 0.5);
   }
 }

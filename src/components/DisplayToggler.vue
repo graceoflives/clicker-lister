@@ -46,15 +46,22 @@
             border: 0;
             border-radius: 4px;
             padding: 8px 12px;
-            color: #FFFFFF;
-            transition: background-color 0.5s, box-shadow 0.3s;
+            color: var(--color);
 
             &.on {
-                background-color: #217DBB;
+                background-color: var(--btn-bg-color);
+
+                &:hover {
+                    background-color: var(--btn-bg-color-hover);
+                }
             }
 
             &.off {
-                background-color: #464545;
+                background-color: var(--btn-bg-color-inactive);
+
+                &:hover {
+                    background-color: var(--btn-bg-color-inactive-hover);
+                }
             }
 
             > .icon {
