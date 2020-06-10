@@ -1,14 +1,9 @@
 <template>
     <div class="theme-select">
-        <label class="theme">
-            <input type="radio" v-model="theme" name="theme" value="dark"/>
-            <svg-icon :file-name="theme === 'dark' ? 'radio-checked' : 'radio-unchecked'"/>
-            Dark theme
-        </label>
-        <label class="theme">
-            <input type="radio" v-model="theme" name="theme" value="light"/>
-            <svg-icon :file-name="theme === 'light' ? 'radio-checked' : 'radio-unchecked'"/>
-            Light theme
+        <label class="theme" v-for="(v, k) in themeName" :key="k">
+            <input type="radio" v-model="theme" name="theme" :value="v.value"/>
+            <svg-icon :file-name="theme === v.value ? 'radio-checked' : 'radio-unchecked'"/>
+            {{v.label}}
         </label>
     </div>
 </template>
@@ -18,6 +13,12 @@
 
     export default {
         name: 'ThemeSelect',
+        data: () => ({
+            themeName: [
+                {value: 'dark', label: 'Dark theme'},
+                {value: 'light', label: 'Light theme'}
+            ]
+        }),
         components: {
             SvgIcon
         },

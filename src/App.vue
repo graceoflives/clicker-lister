@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" ref="appWrapper">
         <header>Clicker Lister</header>
         <theme-select/>
         <save-input/>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     import ThemeSelect from './components/ThemeSelect';
     import SaveInput from './components/SaveInput';
     import DisplayToggler from './components/DisplayToggler';
@@ -27,43 +28,18 @@
         watch: {
             theme: {
                 handler: function () {
-                    let body = document.getElementsByTagName('body');
-                    let cssVars = '';
-                    for (let v in this.cssVars) {
-                        cssVars += `${v}: ${this.cssVars[v]};`
+                    for (let [k, v] of Object.entries(this.cssVars)) {
+                        document.body.style.setProperty(k, v);
                     }
-                    body[0].style = cssVars;
                 },
                 immediate: true
             }
         },
         computed: {
-            theme() {
-                return this.$store.getters.getTheme;
-            },
-            cssVars() {
-                if (this.theme === 'dark') {
-                    return {
-                        '--bg-color': '#222222',
-                        '--color': '#FFFFFF',
-                        '--link-color': '#217DBB',
-                        '--btn-bg-color': '#217DBB',
-                        '--btn-bg-color-hover': '#175883',
-                        '--btn-bg-color-inactive': '#454545',
-                        '--btn-bg-color-inactive-hover': '#313030',
-                    }
-                } else {
-                    return {
-                        '--bg-color': '#FFFFFF',
-                        '--color': '#2C3E50',
-                        '--link-color': '#84C0E9',
-                        '--btn-bg-color': '#84C0E9',
-                        '--btn-bg-color-hover': '#2790D8',
-                        '--btn-bg-color-inactive': '#A2A2A2',
-                        '--btn-bg-color-inactive-hover': '#717171',
-                    }
-                }
-            }
+            ...mapGetters({
+                theme: 'getTheme',
+                cssVars: 'getCSSVars'
+            })
         }
     }
 </script>

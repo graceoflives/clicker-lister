@@ -19,7 +19,11 @@
                 ></textarea>
             </div>
             <div class="a-log-wrapper">
-                <select v-model="selectedTrans" class="a-log-select">
+                <select
+                        v-model="selectedTrans"
+                        class="a-log-select"
+                        aria-label="Select transcension"
+                >
                     <option value="">Select transcension to show ascensions</option>
                     <option
                             v-for="option in transSelectOptions"
@@ -44,6 +48,7 @@
 <script>
     import {get, isEmpty, pad, padStart} from 'lodash';
     import {Decimal} from 'decimal.js';
+    import {mapGetters} from 'vuex';
 
     const DISPLAY_FUNCTION_MAP = {
         'outsider': 'showOutsider',
@@ -261,11 +266,9 @@
 
     export default {
         name: 'ListerArea',
-        data() {
-            return {
-                selectedTrans: ''
-            }
-        },
+        data: () => ({
+            selectedTrans: ''
+        }),
         watch: {
             transSelectOptions: function (newValue, oldValue) {
                 if (newValue !== oldValue) {
@@ -274,12 +277,6 @@
             }
         },
         computed: {
-            generalDisplay: function () {
-                return this.$store.getters.getDisplay;
-            },
-            rawData() {
-                return this.$store.getters.getRawData;
-            },
             textGeneralInfo() {
                 if (!isEmpty(this.rawData)) {
                     let _r = [];
@@ -327,13 +324,12 @@
             transSelectOptions() {
                 let tLog = get(this.rawData, 'stats.transcensions', []);
                 if (!isEmpty(tLog)) {
-                    const _options = Object.entries(tLog).map(([, v]) => {
+                    return Object.entries(tLog).map(([, v]) => {
                         return {
                             value: v.id,
                             text: `No ${v.id}`
                         }
                     });
-                    return _options;
                 }
                 return [];
             },
@@ -369,7 +365,11 @@
                     return '';
                 }
                 return '';
-            }
+            },
+            ...mapGetters({
+                generalDisplay: 'getDisplay',
+                rawData: 'getRawData'
+            })
         },
         methods: {
             showOutsider() {
@@ -408,9 +408,10 @@
                     let noEpicLevel = true;
                     let _info = HEROES
                         .map(hero => {
-                            if (_data[hero.id] && _data[hero.id].epicLevel > 0) {
+                            const epicLevel = get(_data, `${hero.id}.epicLevel`, 0);
+                            if (epicLevel > 0) {
                                 noEpicLevel = false;
-                                return `${hero.name} (${_data[hero.id].epicLevel})`;
+                                return `${hero.name} (${epicLevel})`;
                             }
                             return '';
                         })
@@ -439,8 +440,8 @@
                 const {
                     achievements,
                     ancients: {
-                        ancients: ancients,
-                        rerollSoulsSpent: rerollSoulsSpent
+                        ancients,
+                        rerollSoulsSpent
                     },
                     ancientSouls,
                     ancientSoulsTotal,

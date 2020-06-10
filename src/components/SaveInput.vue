@@ -17,12 +17,10 @@
 
     export default {
         name: 'SaveInput',
-        data() {
-            return {
-                fileData: '',
-                decodedData: '',
-            }
-        },
+        data: () => ({
+            fileData: '',
+            decodedData: '',
+        }),
         watch: {
             fileData: function (newValue, oldValue) {
                 if (newValue !== oldValue) {

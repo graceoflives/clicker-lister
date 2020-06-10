@@ -14,14 +14,15 @@
 
 <script>
     import SvgIcon from './SvgIcon';
+    import {mapGetters} from 'vuex';
 
     export default {
         name: 'DisplayToggler',
         components: {SvgIcon},
         computed: {
-            display() {
-                return this.$store.getters.getDisplay;
-            }
+            ...mapGetters({
+                display: 'getDisplay'
+            })
         },
         methods: {
             toggleDisplay(displayName) {
