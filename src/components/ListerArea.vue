@@ -46,7 +46,10 @@
 </template>
 
 <script>
-    import {get, isEmpty, pad, padStart} from 'lodash';
+    import get from 'lodash/get';
+    import isEmpty from 'lodash/isEmpty';
+    import pad from 'lodash/pad';
+    import padStart from 'lodash/padStart';
     import {Decimal} from 'decimal.js';
     import {mapGetters} from 'vuex';
 

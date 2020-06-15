@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import pako from 'pako';
+    import {inflate} from 'pako/lib/inflate';
 
     const ANTI_CHEAT_CODE = 'Fe12NAfA3R6z4k0z';
     const ZLIB_HEADER = '7a990d405d2c6fb93aa8fbb0ec1a3b23';
@@ -28,7 +28,8 @@
                         this.decodedData = (newValue.substring(0, ZLIB_HEADER.length) === ZLIB_HEADER) ? this.decodeZLib(newValue) : this.decodeBase64(newValue);
                     } catch (e) {
                         this.decodedData = '';
-                        console.log('Save file corrupted and unable to read!');
+                        // console.log('Save file corrupted and unable to read!');
+                        console.log(e);
                     }
                 }
             },
@@ -44,7 +45,7 @@
             },
             decodeZLib(encoded) {
                 let output = atob(encoded.substring(ZLIB_HEADER.length));
-                output = JSON.parse(pako.inflate(output, {to: 'string'}));
+                output = JSON.parse(inflate(output, {to: 'string'}));
                 return output;
             },
             decodeBase64(encoded) {
