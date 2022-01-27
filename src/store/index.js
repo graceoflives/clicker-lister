@@ -1,53 +1,53 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 
 export const store = createStore({
   state: {
-    theme: "dark",
+    theme: 'dark',
     rawData: {},
     display: [
       {
-        name: "outsider",
-        label: "Outsiders",
+        name: 'outsider',
+        label: 'Outsiders',
         visible: true,
       },
       {
-        name: "ancient",
-        label: "Ancients",
+        name: 'ancient',
+        label: 'Ancients',
         visible: true,
       },
       {
-        name: "gild",
-        label: "Gilds",
+        name: 'gild',
+        label: 'Gilds',
         visible: true,
       },
       {
-        name: "raid",
-        label: "Raids",
+        name: 'raid',
+        label: 'Raids',
         visible: true,
       },
       {
-        name: "miscellaneous",
-        label: "Miscellaneous",
+        name: 'miscellaneous',
+        label: 'Miscellaneous',
         visible: true,
       },
       {
-        name: "time",
-        label: "Times",
+        name: 'time',
+        label: 'Times',
         visible: true,
       },
       {
-        name: "event",
-        label: "Events",
+        name: 'event',
+        label: 'Events',
         visible: false,
       },
       {
-        name: "relic",
-        label: "Relics",
+        name: 'relic',
+        label: 'Relics',
         visible: false,
       },
       {
-        name: "totalRelicBonus",
-        label: "Total Relic Bonuses",
+        name: 'totalRelicBonus',
+        label: 'Total Relic Bonuses',
         visible: false,
       },
     ],
@@ -55,31 +55,31 @@ export const store = createStore({
   getters: {
     getTheme: (store) => store.theme,
     getCSSVars: (store) =>
-      store.theme === "dark"
+      store.theme === 'dark'
         ? {
-            "--bg-color": "#222222",
-            "--color": "#FFFFFF",
-            "--link-color": "#217DBB",
-            "--btn-bg-color": "#217DBB",
-            "--btn-bg-color-hover": "#175883",
-            "--btn-bg-color-inactive": "#454545",
-            "--btn-bg-color-inactive-hover": "#313030",
+            '--bg-color': '#222222',
+            '--color': '#FFFFFF',
+            '--link-color': '#217DBB',
+            '--btn-bg-color': '#217DBB',
+            '--btn-bg-color-hover': '#175883',
+            '--btn-bg-color-inactive': '#454545',
+            '--btn-bg-color-inactive-hover': '#313030',
           }
         : {
-            "--bg-color": "#FFFFFF",
-            "--color": "#2C3E50",
-            "--link-color": "#84C0E9",
-            "--btn-bg-color": "#84C0E9",
-            "--btn-bg-color-hover": "#2790D8",
-            "--btn-bg-color-inactive": "#A2A2A2",
-            "--btn-bg-color-inactive-hover": "#717171",
+            '--bg-color': '#FFFFFF',
+            '--color': '#2C3E50',
+            '--link-color': '#84C0E9',
+            '--btn-bg-color': '#84C0E9',
+            '--btn-bg-color-hover': '#2790D8',
+            '--btn-bg-color-inactive': '#A2A2A2',
+            '--btn-bg-color-inactive-hover': '#717171',
           },
     getRawData: (store) => ({ ...store.rawData }),
     getDisplay: (store) => [...store.display],
   },
   mutations: {
     SET_THEME: (state, data) => {
-      if (["dark", "light"].includes(data)) {
+      if (['dark', 'light'].includes(data)) {
         state.theme = data;
       }
     },
@@ -97,13 +97,13 @@ export const store = createStore({
   },
   actions: {
     setTheme: ({ commit }, data) => {
-      commit("SET_THEME", data);
+      commit('SET_THEME', data);
     },
     setRawData: ({ commit }, data) => {
-      commit("SET_RAW_DATA", data);
+      commit('SET_RAW_DATA', data);
     },
     toggleDisplay: ({ commit }, displayName) => {
-      commit("TOGGLE_DISPLAY", displayName);
+      commit('TOGGLE_DISPLAY', displayName);
     },
   },
 });
