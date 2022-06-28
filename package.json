@@ -32,8 +32,7 @@
     "prettier": "^2.5.1",
     "tar": "^6.1.11",
     "vite-svg-loader": "^3.4.0",
-    "vuex": "^4.0.2",
-    "webpack-bundle-analyzer": "^3.9.0"
+    "vuex": "^4.0.2"
   },
   "eslintConfig": {
     "root": true,
