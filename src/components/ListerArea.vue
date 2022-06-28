@@ -1,47 +1,21 @@
 <template>
   <div class="lister-area">
-    <textarea
-      aria-label="Overall Information"
-      class="overall"
-      placeholder="Overall Information"
-      rows="15"
-      :value="textGeneralInfo"
-      @focus="copyCommand"
-    ></textarea>
+    <textarea aria-label="Overall Information" class="overall" placeholder="Overall Information" rows="15"
+      :value="textGeneralInfo" @focus="copyCommand"></textarea>
     <div class="logs">
       <div class="t-log-wrapper">
-        <textarea
-          aria-label="Transcension Log"
-          class="t-log"
-          placeholder="Transcension Log"
-          rows="15"
-          :value="transHistory"
-          @focus="copyCommand"
-        ></textarea>
+        <textarea aria-label="Transcension Log" class="t-log" placeholder="Transcension Log" rows="15"
+          :value="transHistory" @focus="copyCommand"></textarea>
       </div>
       <div class="a-log-wrapper">
-        <select
-          v-model="selectedTrans"
-          class="a-log-select"
-          aria-label="Select transcension"
-        >
+        <select v-model="selectedTrans" class="a-log-select" aria-label="Select transcension">
           <option value="">Select transcension to show ascensions</option>
-          <option
-            v-for="option in transSelectOptions"
-            :key="option.value"
-            :value="option.value"
-          >
+          <option v-for="option in transSelectOptions" :key="option.value" :value="option.value">
             {{ option.text }}
           </option>
         </select>
-        <textarea
-          aria-label="Ascension Log"
-          class="a-log"
-          placeholder="Ascension Log"
-          rows="14"
-          :value="ascHistory"
-          @focus="copyCommand"
-        ></textarea>
+        <textarea aria-label="Ascension Log" class="a-log" placeholder="Ascension Log" rows="14" :value="ascHistory"
+          @focus="copyCommand"></textarea>
       </div>
     </div>
   </div>
@@ -275,7 +249,7 @@ export default {
     selectedTrans: '',
   }),
   watch: {
-    transSelectOptions: function(newValue, oldValue) {
+    transSelectOptions: function (newValue, oldValue) {
       if (newValue !== oldValue) {
         this.selectedTrans = '';
       }
@@ -405,8 +379,7 @@ export default {
       if (!isEmpty(_data)) {
         const _info = OUTSIDERS.map(
           (outsider) =>
-            `${outsider.name} (${
-              _data[outsider.id] ? _data[outsider.id].level : '0'
+            `${outsider.name} (${_data[outsider.id] ? _data[outsider.id].level : '0'
             })`
         ).join(', ');
         return `**Outsiders:** ${_info}.`;
@@ -427,8 +400,8 @@ export default {
             a.level.equals(b.level)
               ? a.name.localeCompare(b.name)
               : a.level.lt(b.level)
-              ? 1
-              : -1
+                ? 1
+                : -1
           );
         const _notSummoned = ANCIENTS.filter(({ id }) => {
           return !(id in _data);
@@ -436,11 +409,10 @@ export default {
         _summoned = _summoned
           .map(({ name, level }) => `${name} (${this.formatDecimal(level)})`)
           .join(', ');
-        return `**Ancients:** ${_summoned}.${
-          _notSummoned.length > 0
+        return `**Ancients:** ${_summoned}.${_notSummoned.length > 0
             ? `\n\nNot Summoned: ${_notSummoned.map((v) => v.name).join(', ')}.`
             : ''
-        }`;
+          }`;
       }
       return '**Ancients:** None.';
     },
@@ -504,9 +476,9 @@ export default {
         .plus(heroSoulsSacrificed);
       const asGain = allHeroSouls.gt(0)
         ? Decimal.log10(allHeroSouls)
-            .times(5)
-            .floor()
-            .minus(ancientSoulsTotal)
+          .times(5)
+          .floor()
+          .minus(ancientSoulsTotal)
         : new Decimal(0);
       const tp = new Decimal(ancientSoulsTotal)
         .times(-0.0003)
@@ -514,8 +486,7 @@ export default {
         .times(-23)
         .plus(25);
       const _info = [
-        `AS (${ancientSoulsTotal}+${asGain.toString()}, ${
-          ancientSouls > 0 ? `***Unspent: ${ancientSouls}***` : 'Unspent: 0'
+        `AS (${ancientSoulsTotal}+${asGain.toString()}, ${ancientSouls > 0 ? `***Unspent: ${ancientSouls}***` : 'Unspent: 0'
         })`,
         `TP (${tp.toFixed(3)}%)`,
         `HS (${[
@@ -536,8 +507,7 @@ export default {
         `Relics Found (This Transcension: ${relicsReceivedThisTranscension}, Total: ${totalRelicsReceived})`,
         `Immortal Damage (${this.formatDecimal(new Decimal(titanDamage))})`,
         `Rubies (${rubies})`,
-        `2x multiplier to all your dmg (${
-          paidForRubyMultiplier ? 'Yes' : 'No'
+        `2x multiplier to all your dmg (${paidForRubyMultiplier ? 'Yes' : 'No'
         })`,
         `Auto Clickers (${autoclickers + dlcAutoclickers})`,
         `Achievements (${Object.entries(achievements).length}/167)`,
@@ -625,8 +595,8 @@ export default {
       return d.lt(0)
         ? `-${this.formatDecimal(d.times(-1))}`
         : d.lt(10000)
-        ? d.toFixed(0)
-        : d.toExponential(4).replace('+', '');
+          ? d.toFixed(0)
+          : d.toExponential(4).replace('+', '');
     },
     formatTime(ts) {
       const cur = (new Date().getTime() - ts) / 1000;
@@ -657,9 +627,9 @@ export default {
     resize: vertical;
   }
 
-  > .overall {
+  >.overall {
     display: block;
-    width: (2/3) * 100%;
+    width: calc(2/3) * 100%;
     margin: 0 auto;
     border: 1px solid var(--color);
     border-radius: 4px;
@@ -670,27 +640,27 @@ export default {
     resize: vertical;
   }
 
-  > .logs {
+  >.logs {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    width: (2/3) * 100%;
+    width: calc(2/3) * 100%;
     margin: 10px auto 0;
 
-    > .t-log-wrapper {
+    >.t-log-wrapper {
       flex: 1;
 
-      > .t-log {
+      >.t-log {
         width: 100%;
         height: 100%;
       }
     }
 
-    > .a-log-wrapper {
+    >.a-log-wrapper {
       flex: 1;
       margin-left: 10px;
 
-      > .a-log-select {
+      >.a-log-select {
         display: block;
         width: 100%;
         border: 1px solid var(--color);
@@ -701,7 +671,7 @@ export default {
         color: var(--color);
       }
 
-      > .a-log {
+      >.a-log {
         width: 100%;
         margin-top: 10px;
       }
@@ -713,15 +683,15 @@ export default {
   .lister-area {
     padding: 10px 10px 0;
 
-    > .overall {
+    >.overall {
       width: 100%;
     }
 
-    > .logs {
+    >.logs {
       display: block;
       width: 100%;
 
-      > .a-log-wrapper {
+      >.a-log-wrapper {
         margin: 10px 0 0;
       }
     }

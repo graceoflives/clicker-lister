@@ -2,27 +2,27 @@
   <div class="theme-select">
     <label class="theme" v-for="(v, k) in themeName" :key="k">
       <input type="radio" v-model="theme" name="theme" :value="v.value" />
-      <svg-icon
-        :file-name="theme === v.value ? 'radio-checked' : 'radio-unchecked'"
-      />
+      <radio-checked v-if="theme === v.value" class="icon"/>
+      <radio-unchecked v-else class="icon" />
       {{ v.label }}
     </label>
   </div>
 </template>
 
 <script>
-import SvgIcon from './SvgIcon';
+import RadioChecked from '@/assets/radio-checked.svg?component';
+import RadioUnchecked from '@/assets/radio-unchecked.svg?component';
 
 export default {
   name: 'ThemeSelect',
   data: () => ({
     themeName: [
-      {value: 'dark', label: 'Dark theme'},
-      {value: 'light', label: 'Light theme'},
+      { value: 'dark', label: 'Dark theme' },
+      { value: 'light', label: 'Light theme' },
     ],
   }),
   components: {
-    SvgIcon,
+    RadioChecked, RadioUnchecked
   },
   computed: {
     theme: {
@@ -43,18 +43,18 @@ export default {
   align-items: center;
   justify-content: center;
 
-  > .theme {
+  >.theme {
     flex: 0;
     display: flex;
     align-items: center;
     margin: 10px;
     white-space: nowrap;
 
-    > input {
+    >input {
       display: none;
     }
 
-    > .icon {
+    >.icon {
       width: 15px;
       margin-right: 4px;
     }

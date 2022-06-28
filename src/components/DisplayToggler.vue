@@ -1,25 +1,23 @@
 <template>
   <div class="display-toggler">
     <label>Display:</label>
-    <button
-      v-for="(item, index) in display"
-      :class="item.visible ? 'on' : 'off'"
-      @click="toggleDisplay(item.name)"
-      :key="index"
-    >
-      <svg-icon :file-name="item.visible ? 'eye' : 'invisible'" />
+    <button v-for="(item, index) in display" :class="item.visible ? 'on' : 'off'" @click="toggleDisplay(item.name)"
+      :key="index">
+      <eye v-if="item.visible" class="icon" />
+      <no-eye v-else class="icon" />
       <span>{{ item.label }}</span>
     </button>
   </div>
 </template>
 
 <script>
-import SvgIcon from './SvgIcon';
+import Eye from '@/assets/eye.svg?component';
+import NoEye from '@/assets/invisible.svg?component';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'DisplayToggler',
-  components: { SvgIcon },
+  components: { Eye, NoEye },
   computed: {
     ...mapGetters({
       display: 'getDisplay',
@@ -40,7 +38,7 @@ export default {
   align-items: center;
   justify-content: center;
 
-  > button {
+  >button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +64,7 @@ export default {
       }
     }
 
-    > .icon {
+    >.icon {
       width: 15px;
       margin-right: 4px;
     }
