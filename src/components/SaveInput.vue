@@ -13,9 +13,11 @@
 
 <script>
 import { inflate } from 'pako/lib/inflate';
+import { inflateRaw } from 'pako';
 
 const ANTI_CHEAT_CODE = 'Fe12NAfA3R6z4k0z';
 const ZLIB_HEADER = '7a990d405d2c6fb93aa8fbb0ec1a3b23';
+const DEFLATE_HEADER = '7e8bb5a89f2842ac4af01b3b7e228592';
 
 export default {
   name: 'SaveInput',
@@ -27,10 +29,13 @@ export default {
     fileData: function(newValue, oldValue) {
       if (newValue !== oldValue) {
         try {
-          this.decodedData =
-            newValue.substring(0, ZLIB_HEADER.length) === ZLIB_HEADER
-              ? this.decodeZLib(newValue)
-              : this.decodeBase64(newValue);
+          if(newValue.substring(0, DEFLATE_HEADER.length) === DEFLATE_HEADER) {
+            this.decodedData = this.decodeDeflate(newValue);
+          } else if (newValue.substring(0, ZLIB_HEADER.length) === ZLIB_HEADER) {
+            this.decodedData = this.decodeZLib(newValue);
+          } else {
+            this.decodedData = this.decodeBase64(newValue);
+          }
         } catch (e) {
           this.decodedData = '';
           // console.log('Save file corrupted and unable to read!');
@@ -64,6 +69,13 @@ export default {
         output = JSON.parse(encoded);
       }
       return output;
+    },
+    decodeDeflate(encoded) {
+        const byteString = atob(encoded.slice(DEFLATE_HEADER.length));
+        const byteData = new Uint8Array(byteString.split("").map(o => o.charCodeAt(0)));
+        const decompressed = inflateRaw(byteData, { to: 'string' });
+
+        return JSON.parse(decompressed);
     },
     readFile(e) {
       const _fileReader = new FileReader();
